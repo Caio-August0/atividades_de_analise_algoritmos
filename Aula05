@@ -1,0 +1,45 @@
+import math
+
+def teorema_mestre(a, b, k, p):
+    logba = math.log(a, b)
+
+    print(f"\nT(n) = {a}T(n/{b}) + n^{k} * (log n)^{p}")
+    print(f"log_b(a) = {logba:.4f}")
+
+    if abs(k - logba) < 1e-6:
+        print("Caso 2 do Teorema Mestre")
+        print(f"T(n) = Theta(n^{logba:.4f} * (log n)^{p+1})")
+
+    elif k < logba:
+        print("Caso 1 do Teorema Mestre")
+        print(f"T(n) = Theta(n^{logba:.4f})")
+
+    else:
+        print("Caso 3 do Teorema Mestre")
+        print(f"T(n) = Theta(n^{k} * (log n)^{p})")
+
+
+# =========================
+# EXERCÍCIOS DO TRABALHO
+# =========================
+
+print("===== MERGE SORT =====")
+teorema_mestre(a=2, b=2, k=1, p=0)
+
+print("\n===== MULTIPLICAÇÃO DE MATRIZES =====")
+print("Método tradicional:")
+teorema_mestre(a=8, b=2, k=2, p=0)
+
+print("\nMétodo de Strassen:")
+teorema_mestre(a=7, b=2, k=2, p=0)
+
+print("\n===== RECORRÊNCIAS =====")
+
+print("\n(a)")
+teorema_mestre(a=2, b=4, k=0.5, p=0)
+
+print("\n(b)")
+teorema_mestre(a=2, b=4, k=1, p=0)
+
+print("\n(c)")
+teorema_mestre(a=16, b=4, k=2, p=0)

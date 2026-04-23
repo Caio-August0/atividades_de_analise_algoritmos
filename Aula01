@@ -1,0 +1,42 @@
+import random
+import time
+
+# =========================
+# INSERTION SORT (O(n²))
+# =========================
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        chave = arr[i]
+        j = i - 1
+        
+        while j >= 0 and arr[j] > chave:
+            arr[j + 1] = arr[j]
+            j -= 1
+        
+        arr[j + 1] = chave
+
+# =========================
+# TESTE DE DESEMPENHO
+# =========================
+
+tamanhos = [1000, 5000, 10000, 20000, 50000]
+
+print("n\tInsertion Sort (s)\tSorted (s)")
+
+for n in tamanhos:
+    lista = [random.randint(0, 100000) for _ in range(n)]
+    
+    lista1 = lista.copy()
+    lista2 = lista.copy()
+    
+    inicio = time.time()
+    insertion_sort(lista1)
+    fim = time.time()
+    tempo_insertion = fim - inicio
+    
+    inicio = time.time()
+    sorted(lista2)
+    fim = time.time()
+    tempo_sorted = fim - inicio
+    
+    print(f"{n}\t{tempo_insertion:.6f}\t\t{tempo_sorted:.6f}")

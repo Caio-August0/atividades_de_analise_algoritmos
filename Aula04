@@ -1,0 +1,18 @@
+import math
+
+def F_rec(n):
+    if n == 1:
+        return 2
+    return 2 * F_rec(n - 1) + n**2
+
+def F_fechada(n):
+    return 6 * (2**n) - n**2 - 4*n - 6
+
+
+n = 10
+
+resultado_rec = F_rec(n)
+resultado_fechado = F_fechada(n)
+
+print(f"F({n}) recursivo = {resultado_rec}")
+print(f"F({n}) fórmula fechada = {resultado_fechado}")

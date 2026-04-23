@@ -1,0 +1,34 @@
+import time
+
+# =========================
+# FUNÇÃO RECURSIVA FATORIAL
+# =========================
+
+def fatorial(n):
+    if n == 0 or n == 1:
+        return 1
+    
+    return n * fatorial(n - 1)
+
+
+# =========================
+# TESTE DE TEMPO
+# =========================
+
+valores = [10, 100, 500, 1000]
+
+print("n\tTempo (segundos)")
+
+for n in valores:
+    inicio = time.time()
+    
+    try:
+        resultado = fatorial(n)
+    except RecursionError:
+        print(f"{n}\tErro de recursão")
+        continue
+    
+    fim = time.time()
+    tempo = fim - inicio
+    
+    print(f"{n}\t{tempo:.6f}")

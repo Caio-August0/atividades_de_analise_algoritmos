@@ -1,0 +1,26 @@
+def eh_palindromo(arr, i, j):
+    if i >= j:
+        return True
+    
+    if arr[i] != arr[j]:
+        return False
+    
+    return eh_palindromo(arr, i + 1, j - 1)
+
+
+# =========================
+# TESTES
+# =========================
+
+array1 = [0, 1, 2, 3, 2, 1, 0]
+array2 = ["a", "b", "b", "a"]
+array3 = ["a", "b", "c", "b", "a"]
+array4 = ["a", "b", "c", "f", "b", "a"]
+
+arrays = [array1, array2, array3, array4]
+
+for i, arr in enumerate(arrays, 1):
+    if eh_palindromo(arr, 0, len(arr) - 1):
+        print(f"array{i} -> É palíndromo")
+    else:
+        print(f"array{i} -> Não é palíndromo")
