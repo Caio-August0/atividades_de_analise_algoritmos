@@ -1,0 +1,136 @@
+Exemplo de Aplicação do Algoritmo Floyd-Warshall
+
+O exemplo escolhido de uso do algoritmo de Floyd-Warshall é a otimização de conversão de formatos de arquivos digitais.
+
+Imagine um sistema que precisa converter arquivos entre diferentes formatos, como DOCX, PDF, TXT, HTML e EPUB. Algumas conversões são diretas, mas outras podem ser mais eficientes se forem feitas passando por um formato intermediário.
+
+Por exemplo, talvez converter diretamente de DOCX para EPUB seja caro ou gere perda de qualidade, mas converter de DOCX para HTML e depois de HTML para EPUB pode ser melhor.
+
+1. MODELAGEM DO PROBLEMA
+
+Para iniciar o cálculo, os formatos de arquivos são representados como um grafo ponderado:
+
+- Vértices/Nós: formatos de arquivo, como DOCX, PDF, TXT, HTML e EPUB.
+- Arestas/Links: conversões possíveis entre dois formatos.
+- Pesos: custo da conversão, que pode representar tempo de processamento, perda de qualidade, custo computacional ou complexidade.
+
+Exemplo:
+
+DOCX -> PDF  = 4
+DOCX -> HTML = 2
+PDF  -> TXT  = 6
+HTML -> EPUB = 3
+HTML -> TXT  = 4
+TXT  -> EPUB = 2
+PDF  -> EPUB = 10
+
+Nesse caso, queremos descobrir o menor custo de conversão entre todos os formatos.
+
+2. CONSTRUÇÃO DA MATRIZ DE ADJACÊNCIA
+
+Os dados são organizados em uma matriz inicial D, de tamanho n x n, em que n é o número de formatos.
+
+- Se houver conversão direta entre os formatos i e j, então D[i][j] recebe o custo da conversão.
+- Se não houver conversão direta, D[i][j] recebe infinito.
+- A diagonal principal D[i][i] recebe 0, pois o custo de converter um formato para ele mesmo é zero.
+
+Matriz inicial:
+
+          DOCX   PDF   TXT   HTML  EPUB
+DOCX        0     4    INF     2    INF
+PDF       INF     0     6    INF    10
+TXT       INF   INF     0    INF     2
+HTML      INF   INF     4      0     3
+EPUB      INF   INF   INF    INF     0
+
+O valor INF indica que não existe uma conversão direta entre os dois formatos.
+
+3. PROCESSO DE ITERAÇÃO
+
+O algoritmo Floyd-Warshall executa três laços de repetição aninhados.
+
+Para cada formato intermediário possível k, ele verifica se passar por esse formato reduz o custo de conversão entre uma origem i e um destino j.
+
+A lógica matemática aplicada é:
+
+dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+
+Isso significa que o algoritmo compara:
+
+- Converter diretamente de i para j;
+- Ou converter de i para k e depois de k para j.
+
+Exemplo:
+
+DOCX -> EPUB diretamente = INF
+DOCX -> HTML -> EPUB = 2 + 3 = 5
+
+Como não existe conversão direta de DOCX para EPUB, o algoritmo descobre que o melhor caminho é:
+
+DOCX -> HTML -> EPUB
+Custo total = 5
+
+Outro exemplo:
+
+PDF -> EPUB diretamente = 10
+PDF -> TXT -> EPUB = 6 + 2 = 8
+
+Como 8 é menor que 10, a matriz é atualizada:
+
+PDF -> EPUB = 8
+
+4. RESULTADO FINAL
+
+Após todas as iterações, a matriz final contém o menor custo de conversão entre todos os pares de formatos.
+
+Matriz final esperada:
+
+          DOCX   PDF   TXT   HTML  EPUB
+DOCX        0     4      6     2      5
+PDF       INF     0      6   INF      8
+TXT       INF   INF      0   INF      2
+HTML      INF   INF      4     0      3
+EPUB      INF   INF    INF   INF      0
+
+Interpretação:
+
+DOCX -> EPUB = 5
+DOCX -> TXT  = 6
+PDF  -> EPUB = 8
+HTML -> EPUB = 3
+TXT  -> EPUB = 2
+
+O algoritmo mostra que algumas conversões indiretas são mais vantajosas do que conversões diretas.
+
+5. APLICAÇÕES PRÁTICAS
+
+Esse tipo de solução pode ser usado em sistemas que trabalham com múltiplos formatos de arquivo, como:
+
+- Plataformas de edição de documentos.
+- Conversores online de arquivos.
+- Sistemas de publicação digital.
+- Ferramentas de migração de dados.
+- Sistemas de arquivamento e preservação digital.
+- Plataformas que convertem documentos para diferentes dispositivos, como leitores digitais.
+
+VANTAGENS:
+
+- Encontra o menor custo de conversão entre todos os formatos.
+- Permite comparar conversões diretas e indiretas.
+- Ajuda a reduzir perda de qualidade ou tempo de processamento.
+- É simples de implementar.
+- Pode ser usado para montar uma tabela global de melhores conversões.
+
+LIMITAÇÃO:
+
+A principal limitação do algoritmo Floyd-Warshall é sua complexidade O(n³).
+
+Isso significa que o tempo de processamento cresce rapidamente conforme aumenta o número de formatos.
+
+Por exemplo, se o sistema tiver centenas ou milhares de formatos e conversores possíveis, o algoritmo pode se tornar pesado computacionalmente.
+
+CONCLUSÃO
+
+O algoritmo Floyd-Warshall pode ser aplicado na otimização de conversão de formatos de arquivos, permitindo descobrir qual sequência de conversões possui o menor custo.
+
+Nesse exemplo, o algoritmo mostra que nem sempre a conversão direta é a melhor escolha. Em alguns casos, passar por um formato intermediário, como HTML ou TXT, pode reduzir o custo total da conversão.
