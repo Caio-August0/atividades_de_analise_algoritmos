@@ -1,0 +1,31 @@
+1. Qual K teve melhor desempenho?
+
+O melhor desempenho foi obtido com K = 3, utilizando a distância Euclidiana.
+
+Essa combinação apresentou a maior acurácia entre os testes realizados, indicando que o modelo conseguiu classificar corretamente a maior parte dos registros do conjunto de teste.
+
+2. Qual métrica obteve melhor resultado?
+
+A métrica que obteve melhor resultado foi a distância Euclidiana.
+
+No experimento, a distância Euclidiana combinada com K = 3 apresentou o melhor resultado geral de acurácia. Isso mostra que, para esse conjunto de dados normalizado, essa métrica foi mais adequada para medir a proximidade entre os registros.
+
+3. O que aconteceu com K muito pequeno?
+
+Quando o valor de K é muito pequeno, como K = 1, o modelo fica muito sensível aos dados de treino.
+
+Isso significa que ele pode considerar apenas o vizinho mais próximo para tomar a decisão, o que aumenta a chance de o modelo ser influenciado por ruídos ou exemplos isolados. Esse comportamento pode causar overfitting, ou seja, o modelo aprende muito bem os dados de treino, mas pode ter desempenho pior em dados novos.
+
+No teste realizado, K = 1 teve desempenho inferior a K = 3, mostrando que um valor um pouco maior de K ajudou o modelo a generalizar melhor.
+
+4. Por que normalizar é importante?
+
+A normalização é importante porque o algoritmo KNN classifica os dados com base no cálculo de distância entre os pontos.
+
+Se os atributos estiverem em escalas muito diferentes, uma variável com valores maiores pode influenciar mais o cálculo da distância do que outras variáveis. Isso pode prejudicar o desempenho do modelo.
+
+Ao usar o StandardScaler, os dados são padronizados, fazendo com que todas as variáveis tenham uma escala mais equilibrada. Dessa forma, o KNN consegue comparar os registros de maneira mais justa e produzir resultados mais confiáveis.
+
+Conclusão
+
+Com base nos testes realizados, a melhor combinação foi K = 3 com distância Euclidiana. A normalização dos dados foi essencial para melhorar o desempenho do KNN, pois o algoritmo depende diretamente do cálculo de distância entre os registros.
